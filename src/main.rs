@@ -17,7 +17,13 @@ fn main() {
             .read_line(&mut guess)
             .expect("failed");
 
-        let guess: u32 = guess.trim().parse().expect("Please enter a valid number");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("please enter a valid number");
+                continue;
+            },
+        };
 
         match guess.cmp(&num) {
             Ordering::Less => println!("Too small"),
