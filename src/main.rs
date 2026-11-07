@@ -8,19 +8,24 @@ fn main() {
     let num = rand::rng().random_range(1..=100);
     println!("{num} btw");
 
-    println!("Please input your guess.");
+    loop {
+        println!("Please input your guess.");
 
-    let mut guess = String::new();
+        let mut guess = String::new();
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("failed");
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("failed");
 
-    let guess: u32 = guess.trim().parse().expect("Please enter a valid number");
+        let guess: u32 = guess.trim().parse().expect("Please enter a valid number");
 
-    match guess.cmp(&num) {
-        Ordering::Less => println!("Too small"),
-        Ordering::Equal => println!("Gj"),
-        Ordering::Greater => println!("Too big"),
+        match guess.cmp(&num) {
+            Ordering::Less => println!("Too small"),
+            Ordering::Equal => {
+                println!("you got it !!");
+                break;
+            }
+            Ordering::Greater => println!("Too big"),
+        }
     }
 }
